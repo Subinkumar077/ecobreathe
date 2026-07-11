@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-haze text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  ::selection {
+    @apply bg-accent-amber/30;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  /* Leaflet overrides */
+  .leaflet-container img {
+    max-width: none;
+  }
+  .leaflet-popup-content-wrapper {
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
+  }
+  .leaflet-popup-tip-container {
+    display: none;
+  }
+
+  /* AQI map markers */
+  .aqi-map-marker {
+    @apply stroke-paper;
+    stroke-width: 2;
+    fill-opacity: 0.85;
+    transition: fill-opacity 150ms;
+  }
+  .aqi-map-marker:hover {
+    fill-opacity: 1;
+  }
+  .aqi-map-marker-good     { @apply fill-aqi-good; }
+  .aqi-map-marker-moderate { @apply fill-aqi-moderate; }
+  .aqi-map-marker-unhealthy{ @apply fill-aqi-unhealthy; }
+  .aqi-map-marker-hazardous{ @apply fill-aqi-hazardous; }
+}
+
+@layer utilities {
+  /* Fade-in-up for Hero entry */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.55s ease-out both;
+  }
+  .animate-delay-100 { animation-delay: 0.1s; }
+  .animate-delay-200 { animation-delay: 0.2s; }
+  .animate-delay-300 { animation-delay: 0.3s; }
+
+  /* Soft pulse for live indicator dot */
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.3); }
+  }
+  .animate-live-pulse {
+    animation: livePulse 2s ease-in-out infinite;
+  }
+
+  /* Gradient text helper — bright warm-gold on dark */
+  .text-gradient-amber {
+    background: linear-gradient(135deg, #F5C842 0%, #E8A33D 50%, #D4843A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section rhythm */
+  .section-rhythm {
+    @apply py-16 md:py-24;
+  }
+}
