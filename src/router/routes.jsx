@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('@/pages/Home'));
@@ -10,6 +11,7 @@ const Rankings = lazy(() => import('@/pages/Rankings'));
 const MapPage = lazy(() => import('@/pages/MapPage'));
 const CityDetail = lazy(() => import('@/pages/CityDetail'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
+const AuthPage = lazy(() => import('@/pages/Auth/AuthPage'));
 
 // Loader fallback
 const PageLoader = () => (
@@ -50,17 +52,31 @@ const routes = createBrowserRouter([
     ],
   },
   {
+    path: '/auth',
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <AuthPage />
+      </Suspense>
+    ),
+  },
+  {
     path: '/dashboard',
-    element: <DashboardLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: '*',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Dashboard />
-          </Suspense>
-        ),
-      },
+        path: '',
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: '*',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+        ]
+      }
     ],
   },
   {

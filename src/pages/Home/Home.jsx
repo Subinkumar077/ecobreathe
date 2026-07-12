@@ -71,21 +71,18 @@ const Home = () => {
           <div className="max-w-7xl mx-auto w-full px-6 sm:px-10 pb-[24vw] sm:pb-[20vw] lg:pb-[17vw] pt-40">
             <div className="max-w-2xl" data-reveal="">
               <p className="text-xs uppercase tracking-[0.25em] text-[#1E4D33] font-medium mb-8">
-                Global Air Quality Platform — est. 2026
+                Global Air Quality Platform — est. 2025
               </p>
               <h1 className="font-['Geist'] text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-[#12281A] font-light tracking-tighter">
-                Air quality data that carries weight, precision <br /> and <em className="font-['Instrument_Serif'] italic font-normal">substance.</em>
+                Air quality intelligence with precision, <br /> trust, and <em className="font-['Instrument_Serif'] font-normal">impact.</em>
               </h1>
-              <p className="mt-8 text-sm text-black/50 tracking-wide">
+              {/* <p className="mt-8 text-sm text-black/50 tracking-wide">
                 / Track real-time indoor and outdoor pollution anywhere /
-              </p>
+              </p> */}
               <div className="mt-10 flex items-center gap-6">
-                <Link to="/dashboard/new-delhi" className="group inline-flex items-center gap-2.5 bg-[#1E4D33] hover:bg-[#2A6647] active:scale-95 text-white font-medium text-base px-7 py-3.5 rounded-full transition-all duration-300 shadow-xl shadow-[#1E4D33]/30 hover:shadow-2xl hover:shadow-[#1E4D33]/40">
-                  Enter Dashboard
+                <Link to="/auth" className="group inline-flex items-center gap-2.5 bg-[#1E4D33] hover:bg-[#2A6647] active:scale-95 text-white font-medium text-base px-7 py-3.5 rounded-full transition-all duration-300 shadow-xl shadow-[#1E4D33]/30 hover:shadow-2xl hover:shadow-[#1E4D33]/40">
+                  Get Started
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-                <Link to="/map" className="text-sm text-black/50 hover:text-black transition-colors duration-300 border-b border-black/20 hover:border-black pb-0.5">
-                  View Map
                 </Link>
               </div>
             </div>
