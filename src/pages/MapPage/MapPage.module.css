@@ -1,0 +1,123 @@
+.pageContainer {
+  position: relative;
+  height: calc(100vh - 73px); /* 100vh minus navbar height (approx 73px) */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapContainer {
+  height: 100%;
+  width: 100%;
+  z-index: 1; /* Below controls */
+}
+
+.controlsOverlay {
+  position: absolute;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Above Leaflet map */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 90%;
+  max-width: 400px;
+}
+
+.searchWrapper {
+  width: 100%;
+  background: var(--bg-surface);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+}
+
+.searchAreaBtn {
+  background: var(--accent-blue);
+  color: white;
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.searchAreaBtn:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: #1558c4;
+}
+
+.searchAreaBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Custom Marker Styling */
+.customMarker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.markerPin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: var(--shadow-sm);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Custom Popup Styling */
+.popupContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.popupContent h4 {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.popupContent p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.viewBtn {
+  display: inline-block;
+  background: var(--bg-tertiary);
+  color: var(--text-accent);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-2);
+}
+
+.viewBtn:hover {
+  background: var(--bg-surface);
+  text-decoration: none;
+}
+
+:global(.leaflet-popup-content-wrapper) {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+:global(.leaflet-popup-tip) {
+  background-color: var(--bg-secondary) !important;
+}

@@ -1,0 +1,122 @@
+.searchContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchContainer.sm .input {
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-10);
+  font-size: var(--font-size-sm);
+}
+
+.searchContainer.md .input {
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-12);
+  font-size: var(--font-size-base);
+}
+
+.searchContainer.lg .input {
+  padding: var(--space-4) var(--space-6) var(--space-4) calc(var(--space-12) + var(--space-2));
+  font-size: var(--font-size-lg);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--text-secondary);
+}
+
+.searchContainer.lg .icon {
+  left: var(--space-5);
+  width: 24px;
+  height: 24px;
+}
+
+.spin {
+  left: auto;
+  right: var(--space-3);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  padding: var(--space-2) 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownItem:hover {
+  background: var(--bg-tertiary);
+}
+
+.itemIcon {
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemName {
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.itemAqi {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.noResults {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}

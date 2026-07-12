@@ -1,0 +1,85 @@
+.container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.viewAll {
+  font-size: var(--font-size-sm);
+  color: var(--accent-blue);
+}
+
+.loading {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: var(--space-2) var(--space-2);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.table td {
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--font-size-sm);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.rank {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.cityLink {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+  transition: color 0.2s;
+}
+
+.cityLink:hover {
+  color: var(--accent-gold);
+}
+
+.aqiBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-weight: var(--font-weight-bold);
+  font-size: 12px;
+}

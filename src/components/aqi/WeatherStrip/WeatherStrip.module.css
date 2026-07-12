@@ -1,0 +1,54 @@
+.weatherStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+  gap: var(--space-4);
+}
+
+.weatherItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 120px;
+}
+
+.icon {
+  color: var(--accent-blue);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.divider {
+  display: none;
+  width: 1px;
+  height: 30px;
+  background-color: var(--border-subtle);
+}
+
+@media (min-width: 768px) {
+  .divider {
+    display: block;
+  }
+}
