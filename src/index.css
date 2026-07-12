@@ -1,11 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  /* Background Colors */
-  --bg-primary: #0d1117;           /* Deep navy — main background */
-  --bg-secondary: #161b22;         /* Slightly lighter — cards */
-  --bg-tertiary: #1c2333;          /* Card hover / elevated surfaces */
-  --bg-surface: #21262d;           /* Input fields, table rows */
+  /* Substance Lab Theme Palette (Light Mode) */
+  --bg-primary: #FBFAF7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #E4EFDA;
+  --bg-surface: rgba(255, 255, 255, 0.9);
+  
+  --text-primary: #12281A;
+  --text-secondary: rgba(18, 40, 26, 0.6);
+  --text-tertiary: rgba(18, 40, 26, 0.4);
+  --text-accent: #1E4D33;
+  
+  --accent-blue: #1E4D33; /* Deep Green used for accents */
+  --accent-blue-hover: #2A6647;
+  --accent-success: #42A85D;
+  --accent-warning: #F59E0B;
+  --accent-danger: #EF4444;
+  
+  --border-subtle: rgba(18, 40, 26, 0.1);
+  --border-default: rgba(18, 40, 26, 0.2);
   
   /* AQI Category Colors */
   --aqi-good: #009966;             /* 0-50: Green */
@@ -15,29 +33,16 @@
   --aqi-severe: #660099;           /* 201-300: Purple */
   --aqi-hazardous: #7E0023;        /* 301+: Maroon */
   
-  /* Text Colors */
-  --text-primary: #f0f6fc;         /* White — headings */
-  --text-secondary: #8b949e;       /* Gray — descriptions */
-  --text-tertiary: #6e7681;        /* Dim — metadata */
-  --text-accent: #58a6ff;          /* Blue — links */
-  
-  /* Accent Colors */
-  --accent-gold: #d4a843;          /* CTA buttons, highlights */
-  --accent-blue: #1f6feb;          /* Active states */
-  --accent-green: #3fb950;         /* Success / Good */
-  
-  /* Borders & Dividers */
-  --border-subtle: #30363d;
-  --border-default: #444c56;
-  
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(255, 222, 51, 0.15);
+  --shadow-sm: 0 1px 3px rgba(18, 40, 26, 0.05);
+  --shadow-md: 0 4px 12px rgba(18, 40, 26, 0.08);
+  --shadow-lg: 0 8px 24px rgba(18, 40, 26, 0.12);
+  --shadow-glow: 0 0 20px rgba(66, 168, 93, 0.15);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Geist', 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
   
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
@@ -114,18 +119,34 @@ button {
   background: none;
 }
 
-/* Animations */
+/* Base Substance Lab Animations */
+@keyframes drift1 { 0%,100%{transform:translate(0,0) rotate(0deg)} 50%{transform:translate(30px,-40px) rotate(8deg)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0) rotate(0deg)} 50%{transform:translate(-40px,30px) rotate(-6deg)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,50px) scale(1.05)} }
+.drift-a { animation: drift1 14s ease-in-out infinite; }
+.drift-b { animation: drift2 19s ease-in-out infinite; }
+.drift-c { animation: drift3 24s ease-in-out infinite; }
+
+[data-reveal] { opacity: 0; transform: translateY(48px); filter: blur(10px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s cubic-bezier(.22,1,.36,1); }
+[data-reveal].is-in { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+[data-panel-img] { transform: translateY(12%) scale(1.06); transition: transform 1.2s cubic-bezier(.22,1,.36,1); }
+[data-panel-img].is-in { transform: translateY(0) scale(1); }
+
+.word-reveal { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1), filter .7s cubic-bezier(.22,1,.36,1); }
+.is-in .word-reveal { opacity: 1; transform: translateY(0); filter: blur(0); }
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-a, .drift-b, .drift-c { animation: none !important; }
+  [data-reveal] { transition: opacity .4s ease !important; transform: none !important; filter: none !important; }
+  .word-reveal { transition: opacity .3s ease !important; transform: none !important; filter: none !important; }
 }
