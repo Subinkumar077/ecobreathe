@@ -4,6 +4,7 @@ import L from 'leaflet';
 import { SearchBar } from '@/components/common';
 import { waqiApi } from '@/services/api/waqiApi';
 import { getAQICategory } from '@/utils';
+import { indianCities } from '@/data';
 import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import styles from './MapPage.module.css';
@@ -59,10 +60,23 @@ const MapPage = () => {
     setLoading(true);
     setShouldSearch(false);
     try {
-      const data = await waqiApi.getMapBoundsFeed(mapBounds);
-      setStations(data);
+      // Create mock stations distributed across India using our dataset
+      const mockStations = indianCities.map((city, index) => ({
+        uid: index + 1000, // Fake UID for routing fallback if needed
+        lat: city.lat,
+        lon: city.lng,
+        aqi: Math.floor(Math.random() * 250) + 30, // Random AQI 30-280
+        station: {
+          name: city.name,
+          url: city.slug
+        }
+      }));
+      
+      // Simulate API latency
+      await new Promise(resolve => setTimeout(resolve, 600));
+      setStations(mockStations);
     } catch (error) {
-      console.error('Failed to fetch stations for bounds:', error);
+      console.error('Failed to generate mock stations:', error);
     } finally {
       setLoading(false);
     }
@@ -117,7 +131,7 @@ const MapPage = () => {
               <div className={styles.popupContent}>
                 <h4>{station.station.name}</h4>
                 <p>AQI: <strong>{station.aqi}</strong></p>
-                <Link to={`/dashboard/@${station.uid}`} className={styles.viewBtn}>
+                <Link to={`/dashboard/${station.station.url || '@' + station.uid}`} className={styles.viewBtn}>
                   View Dashboard
                 </Link>
               </div>

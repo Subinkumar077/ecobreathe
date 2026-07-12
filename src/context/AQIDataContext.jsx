@@ -20,7 +20,12 @@ const FETCH_ERROR = 'FETCH_ERROR';
 const aqiReducer = (state, action) => {
   switch (action.type) {
     case FETCH_START:
-      return { ...state, loading: true, error: null };
+      return { 
+        ...state, 
+        loading: true, 
+        error: null,
+        data: action.payload?.silent ? state.data : null 
+      };
     case FETCH_SUCCESS:
       return { 
         ...state, 
@@ -44,7 +49,7 @@ export const AQIDataProvider = ({ children }) => {
 
   const fetchData = async (silent = false) => {
     if (!silent) {
-      dispatch({ type: FETCH_START });
+      dispatch({ type: FETCH_START, payload: { silent } });
     }
     
     try {
