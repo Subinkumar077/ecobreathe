@@ -1,204 +1,34 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, Quote } from 'lucide-react';
+﻿import { Link } from 'react-router-dom';
+import { AirVent, ArrowRight, ArrowUpRight, Building2, Check, Factory, GraduationCap, HeartPulse, ShieldCheck, Sparkles, Wind } from 'lucide-react';
 
-const Home = () => {
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const solutions = [
+  ['Workplaces', 'Keep teams focused with continuously cleaner indoor air.', Building2, 'from-[#e7f3e5] to-[#b7d8ba]'],
+  ['Education', 'Create healthier classrooms for learning and growth.', GraduationCap, 'from-[#e8f0fb] to-[#b8cce8]'],
+  ['Healthcare', 'Support sensitive spaces with intelligent purification.', HeartPulse, 'from-[#f9e8e5] to-[#edc5bc]'],
+  ['Industry', 'Protect people where the air has to work harder.', Factory, 'from-[#f4eedf] to-[#ddcda6]'],
+];
 
-    // Intersection Observer for reveal animations
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-in');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    
-    document.querySelectorAll('[data-reveal], [data-panel-img], .word-reveal').forEach(el => io.observe(el));
-
-    // Parallax logic
-    if (!reduced) {
-      const layers = document.querySelectorAll('[data-parallax]');
-      let ticking = false;
-      const handleScroll = () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            layers.forEach(el => {
-              const rect = el.getBoundingClientRect();
-              if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                const speed = parseFloat(el.dataset.parallax);
-                el.style.transform = 'translateY(' + (window.scrollY * speed % 600).toFixed(1) + 'px)';
-              }
-            });
-            ticking = false;
-          });
-          ticking = true;
-        }
-      };
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
-  return (
-    <div className="bg-[#FBFAF7] text-[#12281A] antialiased font-['Inter'] selection:bg-[#42A85D] selection:text-black overflow-hidden">
-      {/* ============ HERO ============ */}
-      <header id="top" className="relative min-h-screen overflow-hidden flex flex-col">
-        {/* cinematic background */}
-        <div className="absolute inset-0" data-parallax="0.15">
-          <video 
-            src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/generated-videos/9109ecbb-cdc4-4815-981e-2ea83be13765/1782999286314-2d8dfd1d-f5c0-4ad1-81a1-2055a64391da.mp4" 
-            autoPlay muted playsInline loop 
-            className="w-full h-full object-cover scale-110 opacity-90"
-          ></video>
+const Home = () => (
+  <main className="overflow-hidden bg-[#f8faf6] text-[#163125]">
+    <section className="relative isolate overflow-hidden bg-[#edf5e9] pt-36 sm:pt-44">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_72%_28%,rgba(151,205,160,.48),transparent_25%),radial-gradient(circle_at_87%_74%,rgba(215,238,204,.9),transparent_28%)]" />
+      <div className="max-w-7xl mx-auto grid items-center gap-12 px-6 pb-20 sm:px-10 lg:grid-cols-2 lg:gap-8 lg:pb-28">
+        <div className="max-w-2xl">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2d6942]/15 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#2d6942]"><Sparkles className="h-3.5 w-3.5" /> Clean air for everyday life</p>
+          <h1 className="font-['Geist'] text-5xl font-light leading-[.94] tracking-tight sm:text-7xl lg:text-[5.3rem]">Breathe easier. <em className="font-['Instrument_Serif'] font-normal">Live better.</em></h1>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#163125]/70 sm:text-xl">EcoBreathe air purifiers quietly remove dust, pollen, smoke and everyday pollutants—so your home feels as fresh as it should.</p>
+          <div className="mt-9 flex flex-wrap gap-4"><Link to="/shop" className="inline-flex items-center gap-2 rounded-full bg-[#1e5936] px-6 py-3.5 font-medium text-white shadow-xl shadow-[#1e5936]/20 transition hover:-translate-y-0.5 hover:bg-[#17492c] hover:no-underline">Shop air purifiers <ArrowRight className="h-4 w-4" /></Link><a href="#how-it-works" className="rounded-full px-4 py-3 text-sm font-medium text-[#1e5936] hover:bg-white/70 hover:no-underline">How it works</a></div>
+          <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm font-medium text-[#27583a]"><span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-[#3d9c56]" /> HEPA-grade filtration</span><span className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-[#3d9c56]" /> Whisper-quiet sleep mode</span></div>
         </div>
-        {/* floating translucent forms */}
-        <div className="absolute inset-0 pointer-events-none" data-parallax="0.3">
-          <div className="drift-a absolute top-[12%] left-[8%] w-40 h-40 sm:w-64 sm:h-64 rounded-full bg-gradient-to-br from-white/25 to-white/5 backdrop-blur-sm border border-white/20 shadow-[inset_0_0_60px_rgba(255,255,255,0.25)]"></div>
-          <div className="drift-b absolute top-[28%] right-[10%] w-28 h-28 sm:w-44 sm:h-44 rounded-[40%] bg-gradient-to-tl from-[#42A85D]/25 to-white/10 backdrop-blur-md border border-white/15 shadow-[inset_0_0_40px_rgba(66,168,93,0.3)]"></div>
-          <div className="drift-c absolute top-[52%] left-[38%] w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-white/20 to-transparent backdrop-blur-[2px] border border-white/25"></div>
-          <div className="drift-b absolute top-[8%] left-[55%] w-14 h-14 sm:w-20 sm:h-20 rounded-[45%] bg-white/10 backdrop-blur-sm border border-white/20"></div>
-          <div className="drift-a absolute bottom-[38%] right-[28%] w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#42A85D]/20 to-transparent backdrop-blur-sm border border-white/10"></div>
-        </div>
-        {/* readability gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-[#FBFAF7]/55 to-[#FBFAF7]/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FBFAF7]/60 via-transparent to-[#FBFAF7]/30"></div>
-
-        {/* manifesto */}
-        <div className="relative z-10 flex-1 flex items-end">
-          <div className="max-w-7xl mx-auto w-full px-6 sm:px-10 pb-[24vw] sm:pb-[20vw] lg:pb-[17vw] pt-40">
-            <div className="max-w-2xl" data-reveal="">
-              <p className="text-xs uppercase tracking-[0.25em] text-[#1E4D33] font-medium mb-8">
-                Global Air Quality Platform — est. 2025
-              </p>
-              <h1 className="font-['Geist'] text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-[#12281A] font-light tracking-tighter">
-                Air quality intelligence with precision, <br /> trust, and <em className="font-['Instrument_Serif'] font-normal">impact.</em>
-              </h1>
-              {/* <p className="mt-8 text-sm text-black/50 tracking-wide">
-                / Track real-time indoor and outdoor pollution anywhere /
-              </p> */}
-              <div className="mt-10 flex items-center gap-6">
-                <Link to="/auth" className="group inline-flex items-center gap-2.5 bg-[#1E4D33] hover:bg-[#2A6647] active:scale-95 text-white font-medium text-base px-7 py-3.5 rounded-full transition-all duration-300 shadow-xl shadow-[#1E4D33]/30 hover:shadow-2xl hover:shadow-[#1E4D33]/40">
-                  Get Started
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* giant cropped wordmark */}
-        <div className="absolute -bottom-[4vw] left-1/2 -translate-x-1/2 w-full z-[5] pointer-events-none overflow-hidden" data-parallax="0.5">
-          <p className="font-['Geist'] text-[19.5vw] leading-none text-center text-[#1E4D33]/10 whitespace-nowrap select-none font-light tracking-tighter" style={{ WebkitTextStroke: '1px rgba(30, 77, 51, 0.12)' }}>
-            ECOBREATHE
-          </p>
-        </div>
-      </header>
-
-      {/* ============ PROJECT REEL (Features) ============ */}
-      <section id="features" className="relative pt-24 sm:pt-36 pb-8">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="flex items-end justify-between mb-14" data-reveal="">
-            <h2 className="font-['Geist'] text-4xl sm:text-5xl font-light tracking-tighter">
-              Platform <em className="font-['Instrument_Serif'] italic font-normal">Features</em>
-            </h2>
-          </div>
-        </div>
-
-        {/* panel 01 */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 mb-6 sm:mb-10">
-          <div className="relative rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-[21/9] shadow-2xl shadow-black/15">
-            <video 
-              src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/generated-videos/9109ecbb-cdc4-4815-981e-2ea83be13765/1782999930583-dfa026f6-bc70-4ea9-b421-6fd67b3eff53.mp4" 
-              autoPlay muted playsInline loop 
-              data-panel-img="" 
-              className="w-full h-full object-cover"
-            ></video>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-6 sm:p-10 flex flex-col sm:flex-row sm:items-end sm:justify-between w-full gap-4">
-              <div data-reveal="">
-                <p className="text-xs text-[#42A85D] font-medium mb-2">01</p>
-                <h3 className="font-['Geist'] text-2xl sm:text-3xl font-light tracking-tighter text-white">
-                  Real-time Dashboards
-                </h3>
-                <p className="text-base text-white/60 mt-2 max-w-md">
-                  Monitor live PM2.5, PM10, and Ozone levels with precision instruments and beautiful visualizations.
-                </p>
-              </div>
-              <div className="flex gap-2 text-xs text-white/60" data-reveal="">
-                <span className="border border-white/20 rounded-full px-3 py-1">Analytics</span>
-                <span className="border border-white/20 rounded-full px-3 py-1">Live Data</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* panels 02 + 03 */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 mb-6 sm:mb-10">
-          <div className="lg:col-span-7 lg:-mt-4 relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-black/15">
-            <img data-panel-img="" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5f870fa0-1fa4-4845-bf04-6732d79259fa_1600w.webp" alt="Global Map" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-6 sm:p-8" data-reveal="">
-              <p className="text-xs text-[#42A85D] font-medium mb-2">02</p>
-              <h3 className="font-['Geist'] text-2xl font-light tracking-tighter text-white">Interactive Map</h3>
-              <p className="text-base text-white/60 mt-2 max-w-sm">
-                Explore the world's air quality through our immersive drag-to-search map interface.
-              </p>
-            </div>
-          </div>
-          <div className="lg:col-span-5 lg:mt-24 relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto shadow-2xl shadow-black/15">
-            <img data-panel-img="" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/750647bd-8e6a-40c8-a21a-8398b7c09a75_3840w.png" alt="Rankings" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-6 sm:p-8" data-reveal="">
-              <p className="text-xs text-[#42A85D] font-medium mb-2">03</p>
-              <h3 className="font-['Geist'] text-2xl font-light tracking-tighter text-white">Live Rankings</h3>
-              <p className="text-base text-white/60 mt-2 max-w-sm">
-                A competitive leaderboard of the most polluted cities, updated every hour.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ STUDIO METHOD ============ */}
-      <section className="bg-[#E4EFDA] text-black py-24 sm:py-36">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="max-w-3xl mb-20" data-reveal="">
-            <p className="text-xs uppercase tracking-[0.25em] text-[#1E4D33] font-medium mb-6">Mission</p>
-            <h2 className="font-['Geist'] text-4xl sm:text-6xl leading-[1.05] font-light tracking-tighter">
-              We make the invisible <em className="font-['Instrument_Serif'] italic font-normal">visible.</em>
-            </h2>
-            <p className="text-lg text-black/60 mt-6 max-w-xl">
-              Air pollution affects millions, yet it remains largely unseen. We combine environmental data with premium design to help you make informed decisions about the air you breathe.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ PROOF ============ */}
-      <section className="bg-[#FBFAF7] pt-24 pb-24 sm:pb-36">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 order-2 lg:order-1" data-reveal="">
-            <div className="rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-black/15">
-              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/afde836c-8fe0-4c5b-aa0b-fe420a91d1e2_3840w.png" alt="User Testimonial" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-            </div>
-          </div>
-          <div className="lg:col-span-7 order-1 lg:order-2" data-reveal="">
-            <Quote className="w-8 h-8 text-[#1E4D33] mb-8" />
-            <blockquote className="font-['Geist'] text-2xl sm:text-4xl leading-[1.2] text-[#12281A] font-light tracking-tighter">
-              "Before EcoBreathe, I relied on clunky government websites to check the air quality. Now, it feels like I have a premium environmental lab right in my pocket."
-            </blockquote>
-            <div className="mt-8" data-reveal="">
-              <p className="text-base font-medium">Elena Marsh</p>
-              <p className="text-sm text-black/40">Early Adopter</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+        <div className="relative mx-auto w-full max-w-xl lg:translate-x-8"><div className="absolute inset-x-[10%] bottom-6 h-14 rounded-[50%] bg-[#2b6a40]/20 blur-2xl" /><div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/60 p-5 shadow-2xl shadow-[#1e5936]/15 sm:p-8"><img src="/air-purifier-hero.png" alt="EcoBreathe air purifier in a bright home" className="h-[380px] w-full object-cover object-center sm:h-[480px]" /><div className="absolute bottom-10 left-10 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg backdrop-blur"><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#1e5936]/60">Indoor air quality</p><p className="mt-1 flex items-center gap-2 text-sm font-semibold"><span className="h-2 w-2 rounded-full bg-[#48ae62]" /> Clean & protected</p></div></div></div>
+      </div>
+    </section>
+    <section className="border-y border-[#163125]/8 bg-white py-7"><div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 px-6 text-sm font-medium text-[#163125]/55 sm:justify-between sm:px-10"><span>Captures 99.97% of fine particles*</span><span>Designed for rooms up to 650 sq ft</span><span>Free delivery & 30-day returns</span></div></section>
+    <section id="how-it-works" className="py-24 sm:py-32"><div className="max-w-7xl mx-auto px-6 sm:px-10"><div className="max-w-2xl"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2d7b46]">Made for the air you live in</p><h2 className="mt-5 font-['Geist'] text-4xl font-light leading-tight tracking-tight sm:text-6xl">A cleaner room begins with a smarter <em className="font-['Instrument_Serif'] font-normal">system.</em></h2></div><div className="mt-14 grid gap-5 md:grid-cols-3">{[['01', 'Sense', 'Integrated sensors respond to the air in your room, not a preset timer.', Wind], ['02', 'Purify', 'A multi-stage filter traps particles, allergens and unwanted odors.', AirVent], ['03', 'Protect', 'See your air improve in real time and breathe with confidence.', ShieldCheck]].map(([number, title, copy, Icon]) => <article key={title} className="rounded-3xl border border-[#163125]/8 bg-white p-7 shadow-sm"><span className="text-sm font-semibold text-[#54a86a]">{number}</span><Icon className="mt-12 h-8 w-8 text-[#1e5936]" /><h3 className="mt-5 font-['Geist'] text-2xl font-medium">{title}</h3><p className="mt-3 leading-relaxed text-[#163125]/60">{copy}</p></article>)}</div></div></section>
+    <section className="bg-[#173d29] py-20 text-white sm:py-28"><div className="max-w-7xl mx-auto grid items-center gap-12 px-6 sm:px-10 lg:grid-cols-[1.05fr_.95fr]"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#91d4a0]">Meet EcoBreathe Pro</p><h2 className="mt-5 max-w-xl font-['Geist'] text-4xl font-light leading-tight tracking-tight sm:text-6xl">Powerful purification. Beautifully quiet.</h2><p className="mt-6 max-w-lg text-lg leading-relaxed text-white/65">A premium purifier that adapts automatically as your indoor air changes—while blending into the spaces you love.</p><Link to="/shop" className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-medium text-[#173d29] transition hover:-translate-y-0.5 hover:no-underline">Explore the Pro <ArrowUpRight className="h-4 w-4" /></Link></div><div className="overflow-hidden rounded-[2rem] bg-[#d8ead1] p-4 shadow-2xl shadow-black/20"><img src="/air-purifier-hero.png" alt="EcoBreathe Pro air purifier" className="h-[300px] w-full rounded-[1.3rem] object-cover object-center sm:h-[380px]" /></div></div></section>
+    <section className="py-24 sm:py-32"><div className="max-w-7xl mx-auto px-6 sm:px-10"><div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div className="max-w-2xl"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2d7b46]">For organizations</p><h2 className="mt-5 font-['Geist'] text-4xl font-light tracking-tight sm:text-6xl">Better air, wherever work happens.</h2></div><Link to="/shop" className="inline-flex items-center gap-2 font-medium text-[#1e5936] hover:no-underline">Find your solution <ArrowRight className="h-4 w-4" /></Link></div><div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{solutions.map(([title, description, Icon, tone]) => <article key={title} className={`group min-h-72 rounded-3xl bg-gradient-to-br ${tone} p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#163125]/10`}><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 text-[#1e5936]"><Icon className="h-6 w-6" /></div><div className="mt-24"><h3 className="font-['Geist'] text-2xl font-medium">{title}</h3><p className="mt-3 leading-relaxed text-[#163125]/65">{description}</p></div></article>)}</div></div></section>
+    <section className="px-6 pb-24 sm:px-10 sm:pb-32"><div className="max-w-7xl mx-auto overflow-hidden rounded-[2rem] bg-[#dcefd6] px-7 py-14 text-center sm:px-16 sm:py-20"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2d7b46]">Make room for better air</p><h2 className="mx-auto mt-5 max-w-2xl font-['Geist'] text-4xl font-light tracking-tight sm:text-6xl">Your clean-air routine starts here.</h2><Link to="/shop" className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#1e5936] px-6 py-3.5 font-medium text-white transition hover:bg-[#17492c] hover:no-underline">Shop EcoBreathe <ArrowRight className="h-4 w-4" /></Link></div></section>
+  </main>
+);
 
 export default Home;

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Map as MapIcon, BarChart2 } from 'lucide-react';
+import { Home, Map as MapIcon, BarChart2, ShoppingBag } from 'lucide-react';
 import styles from './BottomNav.module.css';
 
 const BottomNav = () => {
@@ -29,8 +29,17 @@ const BottomNav = () => {
         <BarChart2 size={24} />
         <span>Rankings</span>
       </NavLink>
+
+      <NavLink 
+        to="/shop" 
+        className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}
+      >
+        <ShoppingBag size={24} />
+        <span>Shop</span>
+      </NavLink>
     </nav>
   );
 };
 
 export default BottomNav;
+

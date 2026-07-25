@@ -9,20 +9,23 @@
 @media (min-width: 1024px) {
   .dashboardContainer {
     grid-template-columns: 2fr 1fr;
-    gap: var(--space-8);
+    gap: var(--space-10);
+    align-items: start; /* Essential for sticky sidebar to work correctly */
   }
 }
 
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-8);
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-8);
+  position: sticky;
+  top: 100px; /* Offset for navbar */
 }
 
 .section {
@@ -32,10 +35,12 @@
 }
 
 .sectionTitle {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-light);
+  letter-spacing: -0.02em;
   color: var(--text-primary);
-  margin: 0;
+  margin: 0 0 var(--space-2) 0;
 }
 
 /* Loading & Error States */
@@ -69,10 +74,10 @@
   color: white;
   padding: var(--space-2) var(--space-6);
   border-radius: var(--radius-full);
-  font-weight: var(--font-weight-semibold);
-  transition: background 0.2s;
+  font-weight: var(--font-weight-medium);
+  transition: background 0.3s ease;
 }
 
 .retryBtn:hover {
-  background: #1558c4;
+  background: var(--accent-blue-hover);
 }

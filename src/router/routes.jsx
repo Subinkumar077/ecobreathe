@@ -12,6 +12,7 @@ const MapPage = lazy(() => import('@/pages/MapPage'));
 const CityDetail = lazy(() => import('@/pages/CityDetail'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const AuthPage = lazy(() => import('@/pages/Auth/AuthPage'));
+const Shop = lazy(() => import('@/pages/Shop'));
 
 // Loader fallback
 const PageLoader = () => (
@@ -46,6 +47,14 @@ const routes = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <MapPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'shop',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Shop />
           </Suspense>
         ),
       },

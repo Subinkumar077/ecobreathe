@@ -11,10 +11,15 @@ const AQICard = ({ aqi, stationName, timestamp }) => {
     : 'Live Data';
 
   return (
-    <div className={styles.card}>
+    <div 
+      className={styles.card}
+      style={{
+        background: `radial-gradient(circle at top right, ${category.color}15 0%, rgba(255,255,255,0.8) 60%)`
+      }}
+    >
       <div className={styles.header}>
         <div className={styles.locationInfo}>
-          <MapPin size={18} className={styles.icon} />
+          <MapPin size={22} className={styles.icon} color={category.color} />
           <h2 className={styles.stationName}>{stationName || 'Unknown Station'}</h2>
         </div>
         <div className={styles.timestamp}>Last updated: {formattedTime}</div>
@@ -28,7 +33,10 @@ const AQICard = ({ aqi, stationName, timestamp }) => {
         <div className={styles.statusInfo}>
           <div 
             className={styles.statusBadge} 
-            style={{ backgroundColor: category.color }}
+            style={{ 
+              backgroundColor: category.color,
+              boxShadow: `0 4px 20px ${category.color}40`
+            }}
           >
             {category.label}
           </div>
@@ -36,7 +44,7 @@ const AQICard = ({ aqi, stationName, timestamp }) => {
             {getAQIDescription(aqi)}
           </p>
           <a href="#health-advice" className={styles.adviceLink}>
-            <Info size={14} /> See health advice
+            <Info size={16} /> See detailed health advice
           </a>
         </div>
       </div>

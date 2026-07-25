@@ -50,46 +50,48 @@ const Dashboard = () => {
   if (!data) return null;
 
   return (
-    <div className={styles.dashboardContainer}>
-      {/* Main Content Area */}
-      <div className={styles.mainContent}>
-        <AQICard 
-          aqi={data.aqi} 
-          stationName={data.station.name} 
-          timestamp={data.station.time} 
-        />
-        
-        <WeatherStrip weather={data.weather} />
-        
-        <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Pollutant Overview</h3>
-          <PollutantGrid pollutants={data.pollutants} />
-        </section>
-
-        <section className={styles.section}>
-          <TrendChart 
-            history={data.history} 
-            forecast={data.forecast} 
+    <div className="pt-16 sm:pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-[1600px] mx-auto min-h-screen">
+      <div className={styles.dashboardContainer}>
+        {/* Main Content Area */}
+        <div className={styles.mainContent}>
+          <AQICard 
+            aqi={data.aqi} 
+            stationName={data.station.name} 
+            timestamp={data.station.time} 
           />
-        </section>
+          
+          <WeatherStrip weather={data.weather} />
+          
+          <section className={styles.section}>
+            <h3 className={styles.sectionTitle}>Pollutant Overview</h3>
+            <PollutantGrid pollutants={data.pollutants} />
+          </section>
 
-        <HealthAdvice aqi={data.aqi} />
-      </div>
+          <section className={styles.section}>
+            <TrendChart 
+              history={data.history} 
+              forecast={data.forecast} 
+            />
+          </section>
 
-      {/* Sidebar Area */}
-      <div className={styles.sidebar}>
-        <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Location Map</h3>
-          {/* Use coordinates from WAQI geo feed if available */}
-          <MiniMap 
-            lat={data.station?.geo?.[0] || 28.6353} 
-            lng={data.station?.geo?.[1] || 77.2250} 
-            stationName={data.station?.name}
-          />
-        </section>
+          <HealthAdvice aqi={data.aqi} />
+        </div>
 
-        <MetroCityCards />
-        <CityRankingTable limit={5} />
+        {/* Sidebar Area */}
+        <div className={styles.sidebar}>
+          <section className={styles.section}>
+            <h3 className={styles.sectionTitle}>Location Map</h3>
+            {/* Use coordinates from WAQI geo feed if available */}
+            <MiniMap 
+              lat={data.station?.geo?.[0] || 28.6353} 
+              lng={data.station?.geo?.[1] || 77.2250} 
+              stationName={data.station?.name}
+            />
+          </section>
+
+          <MetroCityCards />
+          <CityRankingTable limit={5} />
+        </div>
       </div>
     </div>
   );
