@@ -13,7 +13,20 @@ const Navbar = () => {
   return (
     <nav className="fixed left-1/2 -translate-x-1/2 top-4 sm:top-7 z-50 w-full max-w-fit px-4 pointer-events-none">
       <div className="flex items-center gap-1 bg-white/90 backdrop-blur-md rounded-full pl-4 pr-1.5 py-1.5 border border-black/10 shadow-xl shadow-black/10 pointer-events-auto">
-        <Link to="/" className="flex items-center gap-2.5 pr-3 sm:pr-4 group hover:no-underline"><span className="grid grid-cols-3 gap-[2.5px]"><span className="w-1 h-1 rounded-full bg-[#42A85D]" /><span className="w-1 h-1 rounded-full bg-black/70" /><span className="w-1 h-1 rounded-full bg-black/30" /><span className="w-1 h-1 rounded-full bg-black/70" /><span className="w-1 h-1 rounded-full bg-black/30" /><span className="w-1 h-1 rounded-full bg-black/70" /><span className="w-1 h-1 rounded-full bg-black/30" /><span className="w-1 h-1 rounded-full bg-black/70" /><span className="w-1 h-1 rounded-full bg-[#42A85D]" /></span><span className="font-['Geist'] font-semibold text-sm tracking-tight whitespace-nowrap text-[#12281A]">Eco Breathe</span></Link>
+        <Link to="/" className="flex flex-none items-center gap-2.5 pr-3 sm:pr-4 group hover:no-underline">
+          <span className="grid h-4 w-4 grid-cols-3 gap-[2.5px] shrink-0">
+            <span className="w-1 h-1 rounded-full bg-[#42A85D]" />
+            <span className="w-1 h-1 rounded-full bg-black/70" />
+            <span className="w-1 h-1 rounded-full bg-black/30" />
+            <span className="w-1 h-1 rounded-full bg-black/70" />
+            <span className="w-1 h-1 rounded-full bg-black/30" />
+            <span className="w-1 h-1 rounded-full bg-black/70" />
+            <span className="w-1 h-1 rounded-full bg-black/30" />
+            <span className="w-1 h-1 rounded-full bg-black/70" />
+            <span className="w-1 h-1 rounded-full bg-[#42A85D]" />
+          </span>
+          <span className="font-['Geist'] font-semibold text-sm tracking-tight whitespace-nowrap text-[#12281A]">Eco Breathe</span>
+        </Link>
         <div className="hidden md:flex items-center gap-1 text-sm text-black/60">
           {user && <Link to="/dashboard/new-delhi" className={navClass('/dashboard/new-delhi')}>Dashboard</Link>}
           <Link to="/map" className={navClass('/map')}>Map</Link>

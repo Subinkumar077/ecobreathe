@@ -4,9 +4,13 @@ import { ImageSlider } from '../../components/auth/ImageSlider';
 import { useAuth } from '../../context/AuthContext';
 
 const sliderImages = [
-  "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/afde836c-8fe0-4c5b-aa0b-fe420a91d1e2_3840w.png",
-  "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5f870fa0-1fa4-4845-bf04-6732d79259fa_1600w.webp",
-  "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/750647bd-8e6a-40c8-a21a-8398b7c09a75_3840w.png"
+  { src: '/air-purifier-hero.png', alt: 'EcoBreath Pro air purifier' },
+  { src: '/air1.png', alt: 'EcoBreath Pro air purifier' },
+  { src: '/process2.png', alt: 'EcoBreath Pro purification process' },
+  { src: '/air6.png', alt: 'EcoBreath Pro purification process' },
+  { src: '/sleep.png', alt: 'EcoBreath Pro air purifier' },
+  { src: '/air3.png', alt: 'EcoBreath Pro purification process' },
+  { src: '/air4.png', alt: 'EcoBreath Pro purification process' },
 ];
 
 const AuthPage = () => {
@@ -15,11 +19,11 @@ const AuthPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
-  
+
   const from = location.state?.from?.pathname || '/dashboard/new-delhi';
 
   const handleSubmit = async (e) => {
@@ -57,9 +61,9 @@ const AuthPage = () => {
       <div className="hidden lg:block lg:w-1/2 relative h-screen p-4">
         <div className="w-full h-full rounded-3xl overflow-hidden shadow-2xl relative">
           <ImageSlider images={sliderImages} interval={6000} />
-          
+
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none z-10" />
-          
+
           <Link to="/" className="absolute top-8 left-8 z-20 flex items-center gap-2">
             <span className="grid grid-cols-3 gap-[2.5px]">
               <span className="w-1 h-1 rounded-full bg-[#42A85D]"></span>
@@ -76,7 +80,7 @@ const AuthPage = () => {
               Eco Breathe
             </span>
           </Link>
-          
+
           <div className="absolute bottom-16 left-8 z-20 text-white max-w-md">
             <h2 className="font-['Geist'] text-4xl font-light mb-4">
               Intelligence with <em className="font-['Instrument_Serif'] italic font-normal">impact.</em>
@@ -114,8 +118,8 @@ const AuthPage = () => {
               {isLogin ? 'Welcome back' : 'Create an account'}
             </h1>
             <p className="text-[#12281A]/60 text-sm">
-              {isLogin 
-                ? 'Enter your credentials to access your dashboard' 
+              {isLogin
+                ? 'Enter your credentials to access your dashboard'
                 : 'Enter your email to get started for free'}
             </p>
           </div>
@@ -126,7 +130,7 @@ const AuthPage = () => {
                 {error}
               </div>
             )}
-            
+
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#12281A]">Email</label>
               <input
@@ -138,7 +142,7 @@ const AuthPage = () => {
                 className="w-full px-4 py-2.5 rounded-lg border border-black/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#1E4D33]/20 focus:border-[#1E4D33] transition-all"
               />
             </div>
-            
+
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#12281A]">Password</label>
               <input
@@ -167,11 +171,11 @@ const AuthPage = () => {
           <div className="mt-8 text-center fade-in" style={{ animationDelay: '0.2s' }}>
             <p className="text-sm text-[#12281A]/60">
               {isLogin ? "Don't have an account? " : "Already have an account? "}
-              <button 
+              <button
                 onClick={() => {
                   setIsLogin(!isLogin);
                   setError('');
-                }} 
+                }}
                 className="text-[#1E4D33] font-semibold hover:underline outline-none"
               >
                 {isLogin ? 'Sign up free' : 'Sign in'}

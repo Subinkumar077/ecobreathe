@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 const ImageSlider = React.forwardRef(
   ({ images, interval = 5000, className, ...props }, ref) => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
+    const currentSlide = images[currentIndex];
+    const currentSrc = typeof currentSlide === "string" ? currentSlide : currentSlide?.src;
+    const currentAlt = typeof currentSlide === "string" ? `Slide ${currentIndex + 1}` : currentSlide?.alt || `Slide ${currentIndex + 1}`;
 
     // Effect to handle the interval-based image transition
     React.useEffect(() => {
@@ -30,8 +33,8 @@ const ImageSlider = React.forwardRef(
         <AnimatePresence initial={false}>
           <motion.img
             key={currentIndex}
-            src={images[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
+            src={currentSrc}
+            alt={currentAlt}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
@@ -40,17 +43,17 @@ const ImageSlider = React.forwardRef(
           />
         </AnimatePresence>
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {images.map((_, index) => (
-                <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={cn(
-                        "w-2 h-2 rounded-full transition-colors duration-300",
-                        currentIndex === index ? "bg-white" : "bg-white/50 hover:bg-white"
-                    )}
-                    aria-label={`Go to slide ${index + 1}`}
-                />
-            ))}
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={cn(
+                "w-2 h-2 rounded-full transition-colors duration-300",
+                currentIndex === index ? "bg-white" : "bg-white/50 hover:bg-white"
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     );
